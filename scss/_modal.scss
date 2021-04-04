@@ -1,0 +1,63 @@
+.modal {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    max-width: 700px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform:translate(-50%,0);
+    background: #002135;
+    padding: 1.5rem;
+    overflow: scroll;
+    z-index: 10;
+    color: white;
+    opacity: 1;
+
+    .close-button {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+        line-height: 1rem;
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 50%);
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+
+    }
+}
+
+.backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: black;
+    opacity: 0.6;
+}
+
+.backdrop, .modal {
+    transition: opacity 900ms ease;
+}
+
+.fade-in{
+    &.modal {
+        opacity: 1;
+    }
+
+    &.backdrop{
+        opacity: 0.6;
+    }
+}
+
+.fade-out{
+    &.modal,&.backdrop {
+        opacity: 0;
+    }
+}

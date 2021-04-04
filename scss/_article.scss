@@ -1,0 +1,54 @@
+@use './imports' as *;
+
+section.articles {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    row-gap: 2rem;
+
+    article {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 0 0.5rem;
+    
+      h2 {
+        font-family: $garamond;
+        font-size: clamp(2rem, 1rem + 2vw, 2rem);
+        color: #00ffeb;
+        cursor: pointer;
+        user-select: none;
+      
+      }
+    
+      p {
+        color: #ababab;
+        font-family: $openSans;
+        display: inline-block;
+        font-size: clamp(1rem, 0.9rem + 0.2vw, 1.2rem)
+      }
+    
+      p.date {
+        &::before {
+          content: "Created on: ";
+        }
+      }
+    
+      p.author {
+        &::before {
+          content: "Author: ";
+        }
+        &::after {
+          content: " -";
+          margin-left: 1rem;
+        }
+        margin-right: 1rem;
+      }
+    }
+
+  }
+  
