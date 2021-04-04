@@ -612,13 +612,6 @@ section.articles article p.author::after {
   transition: opacity 900ms ease;
 }
 
-.fade-in.modal {
-  opacity: 1;
-}
-.fade-in.backdrop {
-  opacity: 0.6;
-}
-
 .fade-out.modal, .fade-out.backdrop {
   opacity: 0;
 }

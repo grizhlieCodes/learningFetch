@@ -46,16 +46,6 @@
     transition: opacity 900ms ease;
 }
 
-.fade-in{
-    &.modal {
-        opacity: 1;
-    }
-
-    &.backdrop{
-        opacity: 0.6;
-    }
-}
-
 .fade-out{
     &.modal,&.backdrop {
         opacity: 0;
