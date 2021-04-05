@@ -1,4 +1,4 @@
-export default function convertLongDateToShort(object) {
+export function convertLongDateToShort(object) {
     let date = object.date;
     const months = [
       "January",

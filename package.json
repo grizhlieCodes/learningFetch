@@ -2,11 +2,24 @@
   "name": "learningFetch",
   "version": "1.0.0",
   "description": "",
-  "main": "./js/renderArticle.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grizhlieCodes/learningFetch.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grizhlieCodes/learningFetch/issues"
+  },
+  "homepage": "https://github.com/grizhlieCodes/learningFetch#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.32.8"
+  }
 }
