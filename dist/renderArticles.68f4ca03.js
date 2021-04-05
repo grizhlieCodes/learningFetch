@@ -198,12 +198,6 @@ var _closeModal = require("./closeModal.js");
 
 var _dateConversion = require("./dateConversion.js");
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function createNewModal(event) {
   var articleID = event.target.getAttribute("data-id");
   var loadedArticle;
@@ -216,16 +210,22 @@ function createNewModal(event) {
       return a.id === articleID;
     });
   }).then(function (object) {
-    return (0, _dateConversion.convertLongDateToShort)(object);
-  }).then(function (data) {
-    loadedArticle = _objectSpread({}, data);
+    loadedArticle = {
+      title: object.title,
+      id: object.id,
+      date: object.created_at,
+      author: object.authors[0].name,
+      content: object.html
+    };
+  }) //!Fix the conversion function to take in the correct property name (not date, but created_at) instead.
+  .then(function () {
+    return loadedArticle.date = (0, _dateConversion.convertLongDateToShort)(loadedArticle);
   }).then(function () {
-    var article = loadedArticle;
-    var title = article.title;
-    var author = article.authors[0].name;
-    var date = article.created_at;
+    var title = loadedArticle.title;
+    var author = loadedArticle.author;
+    var date = loadedArticle.date;
+    var content = loadedArticle.content;
     var headerContent = "\n          <h2 class=\"article_title\">".concat(title, "</h2>\n          <div class=\"meta-data-container\">\n            <p class=\"author\">").concat(author, "</p>\n            <p class=\"date\">").concat(date, "</p> \n          </div>\n        ");
-    var content = article.html;
     var modal = document.createElement('div');
     modal.classList.add('modal', 'removeElement');
     var articleContent = document.createElement('div');
@@ -321,8 +321,8 @@ function addArticlesHtmlToSection() {
 function createAndOpenArticleModal(event) {
   var currentModal = _toConsumableArray(document.querySelectorAll('.modal'));
 
-  if (currentModal.length > 0) {
-    document.body.removeChild(allModals[0]);
+  if (currentModal.length && currentModal.length > 0) {
+    document.body.removeChild(currentModal[0]);
     (0, _createModal.createNewModal)(event);
   } else {
     (0, _createModal.createNewModal)(event);
@@ -361,7 +361,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55622" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55142" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

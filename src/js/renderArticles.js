@@ -68,8 +68,8 @@ function addArticlesHtmlToSection() {
 
 function createAndOpenArticleModal(event) {
   const currentModal = [...document.querySelectorAll('.modal')]
-  if (currentModal.length > 0) {
-    document.body.removeChild(allModals[0])
+  if (currentModal.length && currentModal.length > 0) {
+    document.body.removeChild(currentModal[0])
     createNewModal(event)
   } else {
     createNewModal(event)

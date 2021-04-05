@@ -8,16 +8,24 @@ export function createNewModal(event) {
       .then(data => data.json())
       .then(json => json.posts)
       .then(array => array.find(a => a.id === articleID))
+      .then(object => {
+        loadedArticle = {
+          title: object.title,
+          id: object.id,
+          date: object.created_at,
+          author: object.authors[0].name,
+          content: object.html
+        }
+      })
       //!Fix the conversion function to take in the correct property name (not date, but created_at) instead.
-      .then(object => convertLongDateToShort(object))
-      .then(data => {
-        loadedArticle = {...data}
+      .then(() => {
+        return loadedArticle.date = convertLongDateToShort(loadedArticle)
       })
       .then(() => {
-        const article = loadedArticle;
-        const title = article.title;
-        const author = article.authors[0].name;
-        const date = article.created_at;
+        const title = loadedArticle.title;
+        const author = loadedArticle.author
+        const date = loadedArticle.date
+        const content = loadedArticle.content
         const headerContent = `
           <h2 class="article_title">${title}</h2>
           <div class="meta-data-container">
@@ -25,7 +33,6 @@ export function createNewModal(event) {
             <p class="date">${date}</p> 
           </div>
         `
-        const content = article.html
       
         const modal = document.createElement('div')
         modal.classList.add('modal', 'removeElement')

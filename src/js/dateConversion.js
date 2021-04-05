@@ -1,5 +1,5 @@
 export function convertLongDateToShort(object) {
-    let date = object.date;
+  let date = object.date;
     const months = [
       "January",
       "February",
